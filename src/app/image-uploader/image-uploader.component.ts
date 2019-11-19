@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GoogleCloudService } from '../google-cloud.service';
 
 @Component({
   selector: 'app-image-uploader',
@@ -7,12 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ImageUploaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private googleCloudService: GoogleCloudService) { }
 
   ngOnInit() {
   }
 
   onFileSelected(event) {
-    console.log(event);    
+    const selectedFile = event.target.files[0]
+    console.log(selectedFile);
+    this.googleCloudService.uploadFile(selectedFile)
   }
 }
