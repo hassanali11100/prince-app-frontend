@@ -16,6 +16,8 @@ export class ImageUploaderComponent implements OnInit {
   onFileSelected(event) {
     const selectedFile = event.target.files[0]
     console.log(selectedFile);
-    this.googleCloudService.uploadFile(selectedFile)
+    this.googleCloudService.uploadFile(selectedFile).subscribe(
+      data => console.log(data)
+    )
   }
 }
