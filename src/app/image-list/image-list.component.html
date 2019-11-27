@@ -1,0 +1,8 @@
+<p>image-list works!</p>
+
+<ul>
+    <li *ngFor="let image of images">
+        {{ image.selfLink }}
+        <img src="https://storage.googleapis.com/{{image.bucket}}/{{image.name}}" alt="">
+    </li>
+</ul>

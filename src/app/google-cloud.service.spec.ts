@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { of } from 'rxjs';
 
-fdescribe('GoogleCloudService', () => {
+describe('GoogleCloudService', () => {
   let httpClient: HttpClient;
   let httpTestingController: HttpTestingController;
   let googleCloudService;
