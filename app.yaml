@@ -1,7 +1,7 @@
 runtime: nodejs8
 handlers:
 - url: /
-  static_files: dist/index.html
-  upload: dist/index.html
+  static_files: prince-app/index.html
+  upload: prince-app/index.html
 - url: /
-  static_dir: dist
+  static_dir: prince-app

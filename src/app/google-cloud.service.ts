@@ -8,10 +8,14 @@ import { tap, catchError } from 'rxjs/operators';
 })
 export class GoogleCloudService {
   // TODO: move http options inside uploadFile and merge params options also
+  accessToken = 'ya29.Il-zB1sTey93_6RCPOknJVwUMq9K7LTPTkZKlY0rCLFKWmGpIYQUo5UVXMji3M_2RJ3lC4kiO8-NLtOOzx1w3RHuF-5Sdz9a-HL5rSmzlZbdS61vPp1dYPGfhAUg2npgJw';
+  refreshToken = '1//04pLeyDCjjpsICgYIARAAGAQSNwF-L9Irb3PjYlR7RV4dR43prKcnEiESzFpVdPgWWpXBZzD47tl9ZxAFHIxT89qVaudvxp_ywoM';
+  tokenuri = 'https://www.googleapis.com/oauth2/v4/token'
+  
   httpOptions = {
     headers: new HttpHeaders({
       // 'Content-Type':  'image/jpeg',
-      'Authorization': 'Bearer ya29.Il-yBww4U_lNN-ceEUkAfOHDOZFxpf1ligxXbVm2Bb8O1It7wWuWjgaS9JxCadD_QB5Zhsdo9OeUg3t4aJQ4GUM9G8jpULPvdx4NZdgc9-YRHCsNns7xD-dbjUuaaP7GAw'
+      'Authorization': `Bearer ${this.accessToken}`
     })
   }
 
@@ -31,12 +35,21 @@ export class GoogleCloudService {
   listFiles() {
     this.httpOptions = {
       headers: new HttpHeaders({
-        'Authorization': 'Bearer ya29.Il-yBww4U_lNN-ceEUkAfOHDOZFxpf1ligxXbVm2Bb8O1It7wWuWjgaS9JxCadD_QB5Zhsdo9OeUg3t4aJQ4GUM9G8jpULPvdx4NZdgc9-YRHCsNns7xD-dbjUuaaP7GAw'
+        'Authorization': `Bearer ${this.accessToken}`
       })
     }
     return this.httpClient.get<any>(`https://storage.googleapis.com/storage/v1/b/prince_bucket_1/o`, this.httpOptions)
       .pipe(
         tap(images => console.log(images))
       ) as Observable<any>;
+  }
+
+  refreshAccesstoken() {
+    let body = {
+      token_uri: "https://www.googleapis.com/oauth2/v4/token",
+      refresh_token: `${this.refreshToken}`
+    }
+    return this.httpClient.post<any>(`https://developers.google.com/oauthplayground/refreshAccessToken`,
+     body) as Observable<any>;
   }
 }
