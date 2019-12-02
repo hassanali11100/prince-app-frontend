@@ -3,4 +3,9 @@
 <br>
 <br>
 
-<app-image-uploader></app-image-uploader>
+<button *ngIf='!isLoggedIn()' (click)="signIn()">sign in</button>
+
+<div *ngIf='isLoggedIn()'> 
+    <button (click)="signOut()">sign out</button>
+    <app-image-list></app-image-list>
+</div>
